@@ -1,0 +1,45 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="MauiApp2.Views.ChatPage"
+             Title="ESP32 控制台">
+    <VerticalStackLayout Padding="20" Spacing="20">
+
+        <Frame BackgroundColor="#F0F0F0" Padding="15" CornerRadius="10">
+            <VerticalStackLayout Spacing="10">
+                <Label Text="来自 ESP32 的消息：" FontSize="Medium" FontAttributes="Bold"/>
+                <!-- 绑定到 ChatViewModel 的 ReceivedMessage 属性 -->
+                <Label 
+                    Text="{Binding ReceivedMessage}" 
+                    FontSize="16" 
+                    Padding="10" 
+                    BackgroundColor="WhiteSmoke" 
+                    VerticalOptions="Start" />
+            </VerticalStackLayout>
+        </Frame>
+
+        <BoxView HeightRequest="1" Color="LightGray" />
+
+        <Label Text="LED 控制：" FontSize="Medium" FontAttributes="Bold"/>
+
+        <Grid ColumnDefinitions="*,Auto" VerticalOptions="Start">
+            <Label Grid.Column="0" 
+                   Text="{Binding IsLedOn, StringFormat='LED 状态: {0:ON;OFF}'}" 
+                   VerticalOptions="Center" 
+                   FontSize="Medium"/>
+
+            <!-- 绑定到 ChatViewModel 的 IsLedOn 属性 -->
+            <Switch Grid.Column="1" 
+                    IsToggled="{Binding IsLedOn}" 
+                    OnColor="Green" 
+                    VerticalOptions="Center"/>
+        </Grid>
+
+        <Button Text="断开连接" 
+                Command="{Binding DisconnectCommand}" 
+                BackgroundColor="Red" 
+                TextColor="White"
+                VerticalOptions="EndAndExpand"/>
+
+    </VerticalStackLayout>
+</ContentPage>
